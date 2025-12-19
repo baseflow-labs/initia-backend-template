@@ -1,0 +1,72 @@
+{
+    "project": {
+        "framework": "nest.js",
+        "name": "raven-project",
+        "version": "1.0.0",
+        "outDir": "src",
+        "debugger": false,
+        "database": "postgres"
+    },
+    "schema": {
+        "tables": {
+            "tableOneName": {
+                "propertyOneName": {
+                    "type": "string",
+                    "description": "",
+                    "default": "",
+                    "validations": {
+                        "isRequired": true,
+                        "maxLength": 25
+                    }
+                }
+            }
+        },
+        "relations": [],
+        "enums": {
+            "enumOne": [
+                "valueOne",
+                "valueTwo"
+            ]
+        }
+    },
+    "services": {
+        "userNotificationsService": true,
+        "formOfFormsModule": true,
+        "clientSupportModule": true,
+        "usersMessagingModule": true,
+        "userActivityTrackerModule": true,
+        "dbLoggerService": true,
+        "appHealthCheckService": true,
+        "dockerizeApp": true,
+        "mailServiceIntegration": true,
+        "dummyDataSeeder": true
+    },
+    "env": {
+        "swagger": {
+            "allowedUrls": "FRONTEND_URLS",
+            "url": "ENVIRONMENT",
+            "port": "PORT"
+        },
+        "jwt": {
+            "secret": "JWT_SECRET"
+        },
+        "database": {
+            "host": "DATABASE_HOST",
+            "port": "DATABASE_PORT",
+            "user": "POSTGRES_USER",
+            "password": "POSTGRES_PASSWORD",
+            "name": "POSTGRES_DB"
+        },
+        "mailer": {
+            "email": "OFFICIAL_EMAIL",
+            "password": "OFFICIAL_EMAIL_PASSWORD",
+            "provider": "MAILER_SERVICE_PROVIDER"
+        },
+        "aws": {
+            "accessKey": "AWS_ACCESS_KEY",
+            "secretKey": "AWS_SECRET_ACCESS_KEY",
+            "region": "AWS_REGION",
+            "bucketName": "S3_BUCKET_NAME"
+        }
+    }
+}
