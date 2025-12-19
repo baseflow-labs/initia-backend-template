@@ -1,0 +1,15 @@
+export enum AuditAction {
+    LOGIN_SUCCESS = "login.success",
+    LOGIN_FAILED = "login.failed",
+    LOGOUT = "logout",
+    CREATE = "create",
+    READ = "read",
+    UPDATE = "update",
+    DELETE = "delete",
+    UPLOAD = "upload",
+    DOWNLOAD = "download",
+    EXPORT = "export",
+    PERMISSION_CHANGE = "permission.change",
+    IMPERSONATION_START = "impersonation.start",
+    IMPERSONATION_STOP = "impersonation.stop",
+}

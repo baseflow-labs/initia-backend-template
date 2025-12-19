@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>raven-project</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+</head>
+
+<body>
+    <h1>raven-project API</h1>
+
+    <section>
+        <h3>Welcome to the raven-project website</h3>
+        <button onclick="window.location.href='/api-docs'">Go to Swagger</button>
+    </section>
+
+    
+                <section>
+                    <h3>raven-project Health Check</h3>
+                    <button onclick="checkHealth()">Check Health</button>
+                    <pre id="output"></pre>
+
+                    <script>
+                        async function checkHealth() {
+                            const output = document.getElementById('output');
+                            try {
+                                const res = await fetch('/api/health-check');
+                                const data = await res.json();
+                                output.textContent = JSON.stringify(data, null, 2);
+                                output.style.color = data.status === 'ok' ? 'green' : 'red';
+                            } catch (err) {
+                                output.textContent = err;
+                                output.style.color = 'red';
+                            }
+                        }
+                    </script>
+                </section>
+                
+
+</body>
+
+</html>

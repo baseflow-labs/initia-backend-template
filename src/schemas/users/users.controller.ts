@@ -1,0 +1,109 @@
+import {
+    Body,
+    Delete,
+    Get,
+    Param,
+    Patch,
+    Post,
+    Query,
+    Req,
+    Res,
+} from "@nestjs/common";
+import type { DeleteResult, FindManyOptions, UpdateResult } from "typeorm";
+import type { Request, Response } from "express";
+import { User } from "@/entities";
+import { UsersService } from "./users.service";
+import { CreateUserDto, UpdateUserDto } from "@/dto";
+import { TablesNames, UserFields } from "@/enums";
+import {
+    EditorsWrapper,
+    ControllerWrapper,
+    GetAllByQuery,
+    DeletionQuery,
+    GetOneByQuery,
+} from "@/decorators";
+import type { CustomResponseType, DeleteQueryProps } from "@/types";
+import { RELATIONS_OBJECT } from "@/constants";
+import { DELETE_Pipe, GET_Pipe, POST_PATCH_Pipe } from "@/pipes";
+import { getUserTokenData } from "@/helpers";
+
+@ControllerWrapper("user")
+export class UsersController {
+    constructor(private readonly usersService: UsersService) {}
+
+    // --- Basic CRUD endpoints ---
+
+    @Get()
+    @GetAllByQuery({
+        fieldsEnum: UserFields,
+        descendants: RELATIONS_OBJECT.user.descendants,
+    })
+    async getUsers(
+        @Query(new GET_Pipe(UserFields, RELATIONS_OBJECT.user.ascendants))
+        query: FindManyOptions,
+        @Res() res: Response
+    ) {
+        const response: CustomResponseType<User[]> =
+            await this.usersService.getUsers(query);
+        return res.status(response.status).json(response);
+    }
+
+    @Get(":id")
+    @GetOneByQuery({
+        summary: "get a single user using its ID",
+    })
+    async getUserById(@Param("id") id: string, @Res() res: Response) {
+        const response: CustomResponseType<User> =
+            await this.usersService.getUserById(id);
+        return res.status(response.status).json(response);
+    }
+
+    @Post()
+    @EditorsWrapper(CreateUserDto, "create a new user")
+    async createUser(
+        @Body(new POST_PATCH_Pipe(TablesNames.USER))
+        createUserDto: CreateUserDto,
+        @Req() req: Request,
+        @Res() res: Response
+    ) {
+        const response: CustomResponseType<User | null> =
+            await this.usersService.createUser(
+                createUserDto,
+                getUserTokenData(req)
+            );
+
+        return res.status(response.status).json(response);
+    }
+
+    @Patch(":id")
+    @EditorsWrapper(UpdateUserDto, "update a user")
+    async updateUser(
+        @Param("id") id: string,
+        @Body(new POST_PATCH_Pipe(TablesNames.USER))
+        updateUserDto: UpdateUserDto,
+        @Req() req: Request,
+        @Res() res: Response
+    ) {
+        const response: CustomResponseType<UpdateResult | null> =
+            await this.usersService.updateUser(
+                id,
+                updateUserDto,
+                getUserTokenData(req)
+            );
+
+        return res.status(response.status).json(response);
+    }
+
+    @Delete()
+    @DeletionQuery("delete users")
+    async deleteUser(
+        @Query(new DELETE_Pipe()) query: DeleteQueryProps,
+        @Req() req: Request,
+        @Res() res: Response
+    ) {
+        const response: CustomResponseType<DeleteResult | null> =
+            await this.usersService.deleteUser(query, getUserTokenData(req));
+
+        return res.status(response.status).json(response);
+    }
+}

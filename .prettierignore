@@ -1,0 +1,5 @@
+Dockerfile
+.dockerignore
+pgdata/
+node_modules/
+dist/

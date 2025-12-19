@@ -1,0 +1,10 @@
+import { ApiProperty } from "@nestjs/swagger";
+import { Expose } from "class-transformer";
+import { IsUUID } from "class-validator";
+
+export class DeleteUserMessagingMessageRecipientDto {
+    @Expose()
+    @ApiProperty({ description: "User ID who should receive the message" })
+    @IsUUID("4")
+    userId: string;
+}
