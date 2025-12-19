@@ -1,106 +1,84 @@
-# initia-backend-template
+# Initia Backend Dashboard Template
 
-A backend application for initia-backend-template, auto generated with Raven Nest tool, with modern TypeScript and React-based tooling.
+A production-ready, open-source backend dashboard built with **Nest + TypeScript**, designed to work seamlessly with Initia-generated frontends.
 
-## 🚀 Getting Started
+This template is suitable for:
 
-### 1. Clone & Install
+- 🚀 Startup MVPs
+- 🧑‍💼 Admin panels
+- 🧪 Rapid prototyping with real production code
 
-```bash
-  git clone <repo-url>
-  cd <repo-directory>
-  yarn   # or npm install
-```
+---
 
-### 2. Environment Setup
+## ⭐ Support the Project (Important)
 
-- Copy .env.example to .env
-- Fill in required environment variables
+This project is **free and open-source**.  
+If it is saving you time, helping your project, or you plan to use it commercially:
 
-### 3. Run the App in dev Mode
+👉 **Please support us:**
 
-```bash
-  yarn start:dev
-```
+1. ⭐ [Star this repository](https://github.com/baseflow-labs/initia-backend-template)
+2. ⭐ [Star the GitHub organization](https://github.com/baseflow-labs)
+3. 💖 [Donate](https://github.com/sponsors/baseflow-labs) to sustain development and provide you with more
 
-### 4. Build for Production
+Your support directly funds:
 
-```bash
-  npm run build
-  npm run start:prod
-```
+- New templates
+- Better documentation
+- Faster fixes & features
+- Long-term maintenance
+- Community support
+- Execution of our [roadmap](./Documentation/plan/ROAD_MAP.md)
 
-## 🛠 Development Notes
+> Open-source survives on users who give back.
 
-### 📦 Project Structure
+---
 
-src/
-documentation/
-dto/
-entities/
-enums/
-helpers/
-pipes/
-schemas/
-types/
+## 📚 Documentation – Choose Your Path
 
-### 💬 Commit Message Convention
+We provide **two separate guides**, depending on your background:
 
-We follow the Conventional Commits format with enforced scope per service/module.
+### 👩‍💼 Non-Technical / Product-Focused Users
 
-📘 See full guide here: [COMMIT_CONVENTION.md](./src/documentation/COMMIT_CONVENTION.md)
+➡️ **Start here**  
+📄 [`docs/START_NON_TECHNICAL.md`](./Documentation/start/START_NON_TECHNICAL.md)
 
-Example:
+> For founders, students, PMs, and new or non developers who want to run, configure, and deploy the dashboard with minimal coding.
 
-feat(auth): implement login via OTP
-fix(user): fix avatar cropping on mobile
+---
 
-### ✅ Git Hooks & Code Quality
+### 👨‍💻 Technical Users / Developers
 
-- ✅ Prettier formatting (npm run format)
-- ✅ ESLint for linting (npm run lint)
-- ✅ Git hooks (optionally with Husky)
-- ✅ Commit messages follow Conventional Commits
+➡️ **Start here**  
+📄 [`docs/START_TECHNICAL.md`](./Documentation/start/START_TECHNICAL.md)
 
-### 💬 [ChangeLog](./src/documentation/CHANGELOG.md)
+> For developers who want to extend, customize, and maintain the codebase professionally.
 
-### 🧪 Optional Scripts
+---
 
-```bash
-  yarn start:dev           # Start dev server
-  yarn build               # Build for production
-  yarn commit              # Use Commitizen to write formatted commits
+## 🧰 Tech Stack (Quick Overview)
 
-```
+- [Initia](https://initia.io/) (backend generator)
+- [Nest 11](https://nestjs.com/) + [TypeScript](https://www.typescriptlang.org/)
+- [Express.js](https://expressjs.com/) (HTTP server)
+- [PostgreSQL](https://www.postgresql.org/) + [TypeORM](https://typeorm.io/) (database)
+- [JWT](https://jwt.io/) (authentication)
+- [Swagger](https://swagger.io/) (API documentation)
+- [Nodemailer](https://nodemailer.com/about/) (email service)
 
-### 🔐 Environment Profiles
+---
 
-| Profile | Description               |
-| ------- | ------------------------- |
-| `.env`  | Default/local development |
+## 📄 License
 
-### 📤 Deployment
+MIT License – free for personal and commercial use.  
+Attribution and support are appreciated.
 
-- To deploy: push to your prod branch or follow your CI/CD pipeline.
+---
 
-### 🧰 Tooling & Stack
+## 🧠 Maintainers
 
-#### 🖥 Frameworks & Libraries
-
-- NestJS v11
-- TypeORM v0.3
-- Postgres support
-- JWT Auth
-- Swagger for API docs
-
-#### 🖥 Developer Tools
-
-- TypeScript
-- ESLint
-- Prettier
-- Commitlint + Conventional Commits
-
-### 🧠 Maintainers
-
-- [Mustafa](https://github.com/MustafaHasanat) — RavenNest Owner & Lead Developer
-- [Makkahwi](https://github.com/makkahwi) — RavenNest Co-Owner & Lead Developer
+- [**Suhaib Ahmad**](https://github.com/makkahwi) — Product Owner & Lead Developer
+- [**Mustafa Hasanat**](https://github.com/MustafaHasanat) - Inspire
+- [**Copilot**](https://github.com/features/copilot) — AI Pair Programmer
+- [**ChatGPT**](https://openai.com/chatgpt) — Planning, Surveying & Documentation AI Assistant
+- **Community Contributors** — You 💙

@@ -1,13 +1,14 @@
 {
   "name": "initia-backend-template",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
-  "scripts": {"type-check": "tsc --noEmit","format": "prettier --write .",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
     "build": "nest build",
-    
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",

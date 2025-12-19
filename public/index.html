@@ -4,40 +4,40 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>initia-backend-template</title>
+    <title>Initia Backend Template</title>
     <link rel="stylesheet" href="/styles/main.css" />
 </head>
 
 <body>
-    <h1>initia-backend-template API</h1>
+    <h1>Initia Backend Template API</h1>
 
     <section>
-        <h3>Welcome to the initia-backend-template website</h3>
+        <h3>Welcome to the Initia Backend Template website</h3>
         <button onclick="window.location.href='/api-docs'">Go to Swagger</button>
     </section>
 
-    
-                <section>
-                    <h3>initia-backend-template Health Check</h3>
-                    <button onclick="checkHealth()">Check Health</button>
-                    <pre id="output"></pre>
 
-                    <script>
-                        async function checkHealth() {
-                            const output = document.getElementById('output');
-                            try {
-                                const res = await fetch('/api/health-check');
-                                const data = await res.json();
-                                output.textContent = JSON.stringify(data, null, 2);
-                                output.style.color = data.status === 'ok' ? 'green' : 'red';
-                            } catch (err) {
-                                output.textContent = err;
-                                output.style.color = 'red';
-                            }
-                        }
-                    </script>
-                </section>
-                
+    <section>
+        <h3>Initia Backend Template Health Check</h3>
+        <button onclick="checkHealth()">Check Health</button>
+        <pre id="output"></pre>
+
+        <script>
+            async function checkHealth() {
+                const output = document.getElementById('output');
+                try {
+                    const res = await fetch('/api/health-check');
+                    const data = await res.json();
+                    output.textContent = JSON.stringify(data, null, 2);
+                    output.style.color = data.status === 'ok' ? 'green' : 'red';
+                } catch (err) {
+                    output.textContent = err;
+                    output.style.color = 'red';
+                }
+            }
+        </script>
+    </section>
+
 
 </body>
 

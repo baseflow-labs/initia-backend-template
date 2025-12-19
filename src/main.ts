@@ -1,5 +1,5 @@
 import { AppModule } from "./app.module";
-import { APP_VERSION } from "./documentation/version";
+import { APP_VERSION } from "./version";
 import { InitialDataSeederService } from "./helpers/seeders/initialData";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
@@ -31,8 +31,8 @@ async function bootstrap() {
 
     // configure swagger
     const config = new DocumentBuilder()
-        .setTitle("initia-backend-template DB")
-        .setDescription("The API of the initia-backend-template DB website")
+        .setTitle("Initia Backend Template DB")
+        .setDescription("The API of the Initia Backend Template DB website")
         .setVersion(APP_VERSION)
         .addBearerAuth()
         .build();

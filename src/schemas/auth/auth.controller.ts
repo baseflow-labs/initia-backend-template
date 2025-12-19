@@ -120,7 +120,7 @@ export class AuthController {
 
             const response = await this.authService.logIn(
                 user.username,
-                "12345678"
+                "s5Rsa2?#sd1154"
             );
 
             return res.status(response.status).json(response);

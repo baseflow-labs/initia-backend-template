@@ -1,0 +1,75 @@
+name: PR Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+      - stg
+      - dev
+
+jobs:
+  quality-check:
+    name: Code Quality & Type Safety
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "yarn"
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🔍 Run ESLint
+        run: yarn lint
+        continue-on-error: true
+        id: lint
+
+      - name: 🎨 Check code formatting
+        run: yarn format:check
+        continue-on-error: true
+        id: format
+
+      - name: 🔬 Run TypeScript type check
+        run: yarn typecheck
+        continue-on-error: true
+        id: typecheck
+
+      - name: 📝 Comment PR with results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const lintStatus = '${{ steps.lint.outcome }}' === 'success' ? '✅' : '❌';
+            const formatStatus = '${{ steps.format.outcome }}' === 'success' ? '✅' : '❌';
+            const typecheckStatus = '${{ steps.typecheck.outcome }}' === 'success' ? '✅' : '❌';
+
+            const allPassed = '${{ steps.lint.outcome }}' === 'success' && 
+                             '${{ steps.format.outcome }}' === 'success' && 
+                             '${{ steps.typecheck.outcome }}' === 'success';
+
+            const message = `## Code Quality Check Results
+
+            ${lintStatus} **ESLint**: ${lintStatus === '✅' ? 'Passed' : 'Failed'}
+            ${formatStatus} **Prettier Format**: ${formatStatus === '✅' ? 'Passed' : 'Failed'}
+            ${typecheckStatus} **TypeScript Type Check**: ${typecheckStatus === '✅' ? 'Passed' : 'Failed'}
+
+            ${allPassed ? '### ✅ All checks passed!' : '### ❌ Some checks failed'}
+
+            ${!allPassed ? '**Please fix the issues above before merging.**\n\nTo fix locally:\n```bash\nyarn lint --fix\nyarn format\nyarn typecheck\n```' : ''}`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+
+            if (!allPassed) {
+              core.setFailed('Quality checks failed');
+            }

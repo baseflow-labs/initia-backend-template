@@ -1,22 +1,25 @@
-name: 🚀 Auto Versioning the App
+name: 🏷️ Version Bump and Tag Creation
 
 concurrency:
-    group: ${{ github.ref }}
+    group: version-bump-${{ github.ref }}
     cancel-in-progress: true
-
-permissions:
-    contents: write
-    pull-requests: read
 
 on:
     push:
         branches:
-            - prod
+            - main
+        paths-ignore:
+            - ".github/workflows/**"
+            - "**.md"
 
 jobs:
     bump-version:
         name: App Versioning Auto Bump
         runs-on: ubuntu-latest
+        environment: production
+        permissions:
+            contents: write
+            pull-requests: read
 
         steps:
             - uses: actions/checkout@v3
@@ -24,7 +27,7 @@ jobs:
             - name: Bump version based on last PR title
               id: bump
               run: |
-                  VERSION_FILE="src/documentation/version.ts"
+                  VERSION_FILE="src/version.ts"
                   CURRENT_VERSION=$(grep -oP '[0-9]+\.[0-9]+\.[0-9]+' $VERSION_FILE)
                   BASE=$(echo $CURRENT_VERSION | cut -d. -f1,2)
                   PATCH=$(echo $CURRENT_VERSION | cut -d. -f3)
@@ -35,7 +38,7 @@ jobs:
 
                   PR_TITLE=$(gh pr list \
                     --state merged \
-                    --base prod \
+                    --base main \
                     --limit 10 \
                     --json title,createdAt \
                     | jq -r 'sort_by(.createdAt) | last.title')
@@ -61,55 +64,65 @@ jobs:
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Generate changelog from recent commits
+              id: changelog
+              if: steps.bump.outputs.new_version != ''
+              run: |
+                  # Get the latest tag (previous version)
+                  LAST_TAG=$(git tag --sort=-creatordate | head -n 1 || echo "")
+
+                  if [ -z "$LAST_TAG" ]; then
+                    echo "No previous tag found. Showing last 50 commits."
+                    LOG=$(git log -n 50 --pretty=format:"- %s" --no-merges | grep -Eiv "minor|ci skip|bump version|merge pull request" || echo "- Initial release")
+                  else
+                    echo "Previous tag: $LAST_TAG"
+                    LOG=$(git log "$LAST_TAG"..HEAD --pretty=format:"- %s" --no-merges | grep -Eiv "minor|ci skip|bump version|merge pull request" || echo "- Minor updates")
+                  fi
+
+                  echo "log<<EOF" >> $GITHUB_OUTPUT
+                  echo "$LOG" >> $GITHUB_OUTPUT
+                  echo "EOF" >> $GITHUB_OUTPUT
+
             - name: Update CHANGELOG.md
               if: steps.bump.outputs.new_version != ''
               run: |
                   VERSION=${{ steps.bump.outputs.new_version }}
                   DATE=$(date +"%Y-%m-%d")
+                  REPO="${{ github.repository }}"
 
-                  # Get last tag
-                  LAST_TAG=$(git tag --sort=-creatordate | head -n 1 || echo "")
+                  mkdir -p Documentation  # Ensure folder exists
 
-                  if [ -z "$LAST_TAG" ]; then
-                    LOG=$(git log -n 10 --pretty=format:"- %s")
-                  else
-                    LOG=$(git log "$LAST_TAG"..HEAD --pretty=format:"- %s")
-                  fi
+                  # Create temporary file with new content
+                  TEMP_FILE=$(mktemp)
 
-                  mkdir -p src/documentation  # Ensure folder exists
-
+                  # Add new version at the top
                   {
                     echo "## v$VERSION - $DATE"
                     echo ""
-                    echo "$LOG"
+                    echo "${{ steps.changelog.outputs.log }}"
                     echo ""
-                  } >> src/documentation/CHANGELOG.md
+                    echo "[📦 Release Notes](https://github.com/$REPO/releases/tag/v$VERSION)"
+                    echo ""
+                    echo "---"
+                    echo ""
+                  } > "$TEMP_FILE"
+
+                  # Append existing changelog if it exists
+                  if [ -f Documentation/technical/CHANGELOG.md ]; then
+                    cat Documentation/technical/CHANGELOG.md >> "$TEMP_FILE"
+                  fi
+
+                  # Replace the original file
+                  mv "$TEMP_FILE" Documentation/technical/CHANGELOG.md
 
             - name: Commit and push version bump
               if: steps.bump.outputs.new_version != ''
               run: |
                   git config user.name "Makkahwi Bot"
                   git config user.email "SuhaibAhmadAi@hotmail.com"
-                  git add src/documentation/version.ts src/documentation/CHANGELOG.md
+                  git add src/version.ts Documentation/technical/CHANGELOG.md
                   git commit -m "chore(code): bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
-                  git push origin prod
-
-            - name: Generate changelog from recent commits
-              id: changelog
-              run: |
-                  LAST_TAG=$(git tag --sort=-creatordate | head -n 1 || echo "")
-
-                  if [ -z "$LAST_TAG" ]; then
-                    echo "No previous tag found. Showing last 10 commits."
-                    LOG=$(git log -n 10 --pretty=format:"- %s")
-                  else
-                    echo "Previous tag: $LAST_TAG"
-                    LOG=$(git log "$LAST_TAG"..HEAD --pretty=format:"- %s")
-                  fi
-
-                  echo "log<<EOF" >> $GITHUB_OUTPUT
-                  echo "$LOG" >> $GITHUB_OUTPUT
-                  echo "EOF" >> $GITHUB_OUTPUT
+                  git push origin main
 
             - name: Create GitHub Release
               if: steps.bump.outputs.new_version != ''
@@ -118,10 +131,12 @@ jobs:
                   tag_name: v${{ steps.bump.outputs.new_version }}
                   name: Release v${{ steps.bump.outputs.new_version }}
                   body: |
-                      🚀 Auto-generated release based on recent commits:
+                      🚀 **Release v${{ steps.bump.outputs.new_version }}**
+
+                      ## What's Changed
 
                       ${{ steps.changelog.outputs.log }}
 
-                      **Full Changelog**: https://github.com/your-account/your-repo/commits/v${{ steps.bump.outputs.new_version }}
+                      **Full Changelog**: https://github.com/${{ github.repository }}/commits/v${{ steps.bump.outputs.new_version }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

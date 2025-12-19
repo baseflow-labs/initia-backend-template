@@ -3,7 +3,10 @@ name: 🔍 Check PR title format
 on:
     pull_request:
         types: [opened, edited, reopened, synchronize]
-        branches: [prod, stg]
+        branches:
+            - main
+            - stg
+            - dev
 
 jobs:
     pr-title-check:
