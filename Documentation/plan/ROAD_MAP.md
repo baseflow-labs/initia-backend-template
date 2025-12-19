@@ -236,34 +236,23 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Email integration & management service (templates, scheduling, logs)
+- [ ] Data export/import tools (beyond CSV/XLSX)
+- [ ] Advanced user controls (dashboard customization)
+- [ ] Announcements / manual notifications generation service
+- [ ] Build technical & business documentation (full suite)
+- [ ] Build analysis tools integration (monitoring)
 - [ ] Open-search integration (ElasticSearch / MeiliSearch)
 - [ ] Blockchain integration (basic support for data storage/verification)
 - [ ] Multi-tenant support (orgs, subdomains, data isolation)
-- [ ] Generate automated tests (unit + integration) for core components
-- [ ] Build form analytics (submission stats, abandonment rates)
-- [ ] Build dashboard analytics (view stats, widget interactions)
-- [ ] Build A/B testing framework (for forms and dashboards)
-- [ ] Split admin panel into separate app (if not already done in Turborepo)
-- [ ] Build analysis tools integration (actual implementation beyond prep)
-- [ ] Build technical & business documentation (full suite)
-- [ ] Advanced user controls (dashboard customization)
-- [ ] Announcements / manual notifications generation service
-- [ ] Email integration & management service (templates, scheduling, logs)
+- [ ] User feedback and support system (in-app chat)
+- [ ] Internationalization enhancements (Admin-panel controlled localization)
 - [ ] Build user-level permissions
 - [ ] Build record-level permissions
-- [ ] Advanced form features (conditional logic, calculated fields)
-- [ ] Advanced DataTable features (pivot tables, custom formulas)
-- [ ] Mobile app (Flutter)
-- [ ] PWA support
-- [ ] Offline support (caching, local storage sync)
 - [ ] Performance optimizations (lazy loading, code splitting)
-- [ ] Accessibility improvements (WCAG compliance)
-- [ ] Internationalization enhancements (Admin-panel controlled localization)
-- [ ] Third-party integrations (CRM, ERP, marketing tools)
-- [ ] Data export/import tools (beyond CSV/XLSX)
 - [ ] Advanced security features (2FA, SSO)
-- [ ] User feedback and support system (in-app chat)
-- [ ] Build usability testing and UX improvements
+- [ ] Third-party integrations (CRM, ERP, marketing tools)
+- [ ] Build unit, integration, and E2E testing suites
 - [ ] Full template dashboard catalog (e-commerce, SIS, CRM, etc.)
     - [ ] e-Commerce
     - [ ] Marketplace / 3rd party sellers
@@ -310,16 +299,15 @@ Implement only the “must-have knobs” first:
     - [ ] Video streaming platform
     - [ ] Firebase CMS
 - [ ] Commit-based code generation
+- [ ] Caching
+- [ ] Queue
+- [ ] Micro-service architecture support
+- [ ] Database variants (Firebase, MySQL, MongoDB options)
+- [ ] Real-time features (WebSockets, live updates)
+- [ ] GraphQL API support
+- [ ] Framework Variants (e.g., Express.js, GoLang, Java, Django)
+- [ ] CI/CD pipeline templates (GitHub Actions, GitLab CI, Jenkins / service-based options e.g. aws beanstalk + netlify ...etc)
 - [ ] AI-assisted features planing
 - [ ] AI-assisted code generation (initial experiments + feasibility study)
 - [ ] AI-assisted testing (unit/integration test generation)
 - [ ] AI-assisted documentation (auto-generate/update docs based on code changes)
-- [ ] Real-time features (WebSockets, live updates)
-- [ ] GraphQL API support
-- [ ] Server-side rendering (SSR) support
-- [ ] Framework Variants (Frontend React alternatives, e.g., Vue, Angular + Backend variants, e.g., Express.js, GoLang, Java, Django)
-- [ ] Micro-frontend + micro-service architecture support
-- [ ] Database variants (Firebase, MySQL, MongoDB options)
-- [ ] CI/CD pipeline templates (GitHub Actions, GitLab CI, Jenkins / service-based options e.g. aws amplify + beanstalk ...etc)
-
-- [ ] Caching
