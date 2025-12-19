@@ -8,3 +8,4 @@
     - [ ] Notifications duplication
     - [ ] Initial Permissions (cover all services, e.g. logging,)
     - [ ] Turn get audit params to optional
+- [ ] Build husky settings, eslint, prettier, commitlint
