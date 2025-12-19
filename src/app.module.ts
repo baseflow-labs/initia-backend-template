@@ -19,13 +19,10 @@ import { APP_FILTER, APP_GUARD } from "@nestjs/core";
 import { JwtModule } from "@nestjs/jwt";
 import { ClsModule } from "nestjs-cls";
 
-import { NotificationsModule } from "./schemas/notifications/notifications.module";
 import { FormOfFormsModule } from "./schemas/forms/formOfForms.module";
 import { SupportModule } from "./schemas/support/support.module";
 import { UserMessagingModule } from "./schemas/messaging/messaging.module";
-import { AuditModule } from "./schemas/audits/audit.module";
 
-import { LoggingModule } from "./schemas/loggings/logging.module";
 import { AllExceptionsFilter } from "./schemas/loggings/allExceptionsFilter";
 
 import { HealthCheckModule } from "./schemas/health-check/health-check.module";
@@ -41,6 +38,8 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import entities from "./entities/entities";
 import { MailerModule } from "@nestjs-modules/mailer";
+import { AuditModule } from "./schemas/audits";
+import { LoggingModule } from "./schemas/loggings";
 
 @Module({
     imports: [

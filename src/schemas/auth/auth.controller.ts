@@ -1,8 +1,8 @@
-import { ControllerWrapper } from "@/decorators";
-import { LoginUserDto, EmailDto } from "@/dto";
-import { getUserTokenData } from "@/helpers";
 import { UsersService } from "../users/users.service";
 import { AuthService } from "./auth.service";
+import { ControllerWrapper } from "@/decorators";
+import { DummyLoginUserDto, EmailDto, LoginUserDto } from "@/dto";
+import { getUserTokenData } from "@/helpers";
 import {
     Body,
     Get,
@@ -15,6 +15,7 @@ import {
     Res,
 } from "@nestjs/common";
 import { ApiBody, ApiOperation } from "@nestjs/swagger";
+
 import type { Request, Response } from "express";
 
 import { UserRole } from "src/enums/userRole.enum";

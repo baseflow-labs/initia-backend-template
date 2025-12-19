@@ -1,29 +1,28 @@
+import { CreateAppEvaluationDto } from "@/dto/support/appEvaluation/create-appEvaluation.dto";
+import { CreateFaqDto } from "@/dto/support/faq/create-faq.dto";
+import { UpdateFaqDto } from "@/dto/support/faq/update-faq.dto";
+import { CreateSupportTicketDto } from "@/dto/support/supportTicket/create-supportTicket.dto";
+import { CreateUserManualContentDto } from "@/dto/support/userManual/content/create-userManualContent.dto";
+import { UpdateUserManualContentDto } from "@/dto/support/userManual/content/update-userManualContent.dto";
+import { CreateUserManualSectionDto } from "@/dto/support/userManual/section/create-userManualSection.dto";
+import { UpdateUserManualSectionDto } from "@/dto/support/userManual/section/update-userManualSection.dto";
+import { CreateUserManualSubsectionDto } from "@/dto/support/userManual/subsection/create-userManualSubsection.dto";
+import { UpdateUserManualSubsectionDto } from "@/dto/support/userManual/subsection/update-userManualSubsection.dto";
 import {
     Body,
     Controller,
     Delete,
     Get,
     Param,
+    ParseUUIDPipe,
     Patch,
     Post,
     Query,
     Res,
-    ParseUUIDPipe,
 } from "@nestjs/common";
-import { Response } from "express";
+
+import type { Response } from "express";
 import { SupportService } from "./support.service";
-import {
-    CreateFaqDto,
-    UpdateFaqDto,
-    CreateSupportTicketDto,
-    CreateUserManualSectionDto,
-    UpdateUserManualSectionDto,
-    CreateUserManualSubsectionDto,
-    UpdateUserManualSubsectionDto,
-    CreateUserManualContentDto,
-    UpdateUserManualContentDto,
-    CreateAppEvaluationDto,
-} from "@/dto";
 
 @Controller("support")
 export class SupportController {

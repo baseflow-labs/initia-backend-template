@@ -9,18 +9,17 @@ import {
     Query,
     Res,
 } from "@nestjs/common";
-import { Response } from "express";
+
+import type { Response } from "express";
 import { FormOfFormsService } from "./formOfForms.service";
-import {
-    CreateFormDto,
-    UpdateFormDto,
-    CreateFormSectionDto,
-    UpdateFormSectionDto,
-    CreateFormSectionInputDto,
-    UpdateFormSectionInputDto,
-    CreateFormAnswerDto,
-    UpdateFormAnswerDto,
-} from "@/dto";
+import { CreateFormDto } from "@/dto/forms/create-form.dto";
+import { UpdateFormDto } from "@/dto/forms/update-form.dto";
+import { CreateFormSectionDto } from "@/dto/forms/formSection/create-formSection.dto";
+import { UpdateFormSectionDto } from "@/dto/forms/formSection/update-formSection.dto";
+import { CreateFormSectionInputDto } from "@/dto/forms/formSectionInput/create-formSectionInput.dto";
+import { UpdateFormSectionInputDto } from "@/dto/forms/formSectionInput/update-formSectionInput.dto";
+import { CreateFormAnswerDto } from "@/dto/forms/formAnswer/create-formAnswer.dto";
+import { UpdateFormAnswerDto } from "@/dto/forms/formAnswer/update-formAnswer.dto";
 
 @Controller("form")
 export class FormOfFormsController {

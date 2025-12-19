@@ -6,8 +6,6 @@ import { Permission } from "./permission.entity";
 import { Role } from "./role.entity";
 import { User } from "./user.entity";
 
-import { Notification } from "./notification.entity";
-
 import { Form } from "./formOfForms/form.entity";
 import { FormSection } from "./formOfForms/formSection.entity";
 import { FormSectionInput } from "./formOfForms/formSectionInput.entity";

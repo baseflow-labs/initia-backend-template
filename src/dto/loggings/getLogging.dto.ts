@@ -1,6 +1,6 @@
 import { Type } from "class-transformer";
 import { IsIn, IsOptional, IsString } from "class-validator";
-import { LogLevel } from "src/entities/logging.entity";
+import type { LogLevel } from "@/entities/logging.entity";
 
 export const LOG_LEVELS: LogLevel[] = ["warn", "error"];
 

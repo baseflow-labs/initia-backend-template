@@ -1,10 +1,5 @@
-import {
-    ForbiddenException,
-    Injectable,
-    UnauthorizedException,
-} from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { CreateUserMessagingDto, CreateUserMessagingMessageDto } from "@/dto";
+import { CreateUserMessagingDto } from "@/dto/messaging/create-userMessaging.dto";
+import { CreateUserMessagingMessageDto } from "@/dto/messaging/create-userMessagingMessage.dto";
 import {
     UserMessaging,
     UserMessagingMessage,
@@ -12,6 +7,7 @@ import {
     UserMessagingMessageRecipient,
     UserMessagingParticipant,
 } from "@/entities";
+import { TablesNames } from "@/enums";
 import {
     createHandler,
     deleteHandler,
@@ -25,6 +21,13 @@ import {
     DeleteQueryProps,
     FullTokenPayload,
 } from "@/types";
+import {
+    ForbiddenException,
+    Injectable,
+    UnauthorizedException,
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { table } from "console";
 import {
     DeleteResult,
     FindManyOptions,
@@ -67,7 +70,7 @@ export class UserMessagingService {
         return await getByIdHandler<UserMessaging>({
             id,
             repository: this.userMessagingRepository,
-            table: "UserMessaging",
+            table: TablesNames.USER_MESSAGING_MESSAGE,
         });
     }
 
@@ -202,7 +205,7 @@ export class UserMessagingService {
             const response = await updateHandler<UserMessaging>({
                 id,
                 dto,
-                table: "UserMessaging",
+                table: TablesNames.USER_MESSAGING,
                 repository: this.userMessagingRepository,
             });
 
@@ -387,7 +390,7 @@ export class UserMessagingService {
         return await getByIdHandler<UserMessagingMessage>({
             id,
             repository: this.messageRepository,
-            table: "Message",
+            table: TablesNames.USER_MESSAGING,
         });
     }
 
@@ -470,7 +473,7 @@ export class UserMessagingService {
             const response = await updateHandler<UserMessagingMessage>({
                 id: messageId,
                 dto: { text, isEdited: true },
-                table: "Message",
+                table: TablesNames.USER_MESSAGING_MESSAGE,
                 repository: this.messageRepository,
             });
 
@@ -513,7 +516,7 @@ export class UserMessagingService {
             const response = await updateHandler<UserMessagingMessage>({
                 id: messageId,
                 dto: { isDeleted: true, deletedAt: new Date(), text: null },
-                table: "Message",
+                table: TablesNames.USER_MESSAGING_MESSAGE,
                 repository: this.messageRepository,
             });
 
@@ -536,7 +539,7 @@ export class UserMessagingService {
             await updateHandler<UserMessagingMessageRecipient>({
                 id: rec.id,
                 dto: { isHidden: true },
-                table: "MessageRecipient",
+                table: TablesNames.USER_MESSAGING_MESSAGE_RECIPIENT,
                 repository: this.recipientRepository,
             });
 

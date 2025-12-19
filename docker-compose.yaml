@@ -2,7 +2,7 @@ version: "3.8"
 services:
     postgres-db:
         container_name: postgres-db
-        image: postgres
+        image: postgres:16
         restart: always
         env_file: .env
         ports:
@@ -23,7 +23,7 @@ services:
             - postgres-db
 
     # nest-app:
-    #     container_name: raven-project
+    #     container_name: initia-backend-template
     #     build:
     #         context: .
     #         dockerfile: Dockerfile
@@ -36,3 +36,6 @@ services:
     #         - postgres-db
     #     volumes:
     #         - ./src:/app/src
+
+volumes:
+    pgdata:

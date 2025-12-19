@@ -1,4 +1,5 @@
 import { LoggingService } from "./logging.service";
+import { GetLoggingQueryDto } from "@/dto/loggings/getLogging.dto";
 import {
     Controller,
     Get,
@@ -6,7 +7,6 @@ import {
     Param,
     Query,
 } from "@nestjs/common";
-import { GetLoggingQueryDto } from "@/dto";
 
 @Controller("logging")
 export class LoggingController {

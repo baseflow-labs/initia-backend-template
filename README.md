@@ -1,6 +1,6 @@
-# raven-project
+# initia-backend-template
 
-A backend application for raven-project, auto generated with Raven Nest tool, with modern TypeScript and React-based tooling.
+A backend application for initia-backend-template, auto generated with Raven Nest tool, with modern TypeScript and React-based tooling.
 
 ## 🚀 Getting Started
 
@@ -35,14 +35,14 @@ A backend application for raven-project, auto generated with Raven Nest tool, wi
 ### 📦 Project Structure
 
 src/
-  documentation/
-  dto/
-  entities/
-  enums/
-  helpers/
-  pipes/
-  schemas/
-  types/
+documentation/
+dto/
+entities/
+enums/
+helpers/
+pipes/
+schemas/
+types/
 
 ### 💬 Commit Message Convention
 
@@ -75,9 +75,9 @@ fix(user): fix avatar cropping on mobile
 
 ### 🔐 Environment Profiles
 
-| Profile           | Description               |
-| ----------------- | ------------------------- |
-| `.env`            | Default/local development |
+| Profile | Description               |
+| ------- | ------------------------- |
+| `.env`  | Default/local development |
 
 ### 📤 Deployment
 

@@ -1,32 +1,24 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
+import { CreateAppEvaluationDto } from "@/dto/support/appEvaluation/create-appEvaluation.dto";
+import { CreateFaqDto } from "@/dto/support/faq/create-faq.dto";
+import { UpdateFaqDto } from "@/dto/support/faq/update-faq.dto";
+import { CreateSupportTicketDto } from "@/dto/support/supportTicket/create-supportTicket.dto";
+import { CreateUserManualContentDto } from "@/dto/support/userManual/content/create-userManualContent.dto";
+import { UpdateUserManualContentDto } from "@/dto/support/userManual/content/update-userManualContent.dto";
+import { CreateUserManualSectionDto } from "@/dto/support/userManual/section/create-userManualSection.dto";
+import { UpdateUserManualSectionDto } from "@/dto/support/userManual/section/update-userManualSection.dto";
+import { CreateUserManualSubsectionDto } from "@/dto/support/userManual/subsection/create-userManualSubsection.dto";
+import { UpdateUserManualSubsectionDto } from "@/dto/support/userManual/subsection/update-userManualSubsection.dto";
 import {
-    DeleteResult,
-    FindManyOptions,
-    Repository,
-    UpdateResult,
-} from "typeorm";
-import {
+    AppEvaluation,
     Faq,
     SupportTicket,
+    UserManualContent,
     UserManualSection,
     UserManualSubsection,
-    UserManualContent,
-    AppEvaluation,
 } from "@/entities";
-import {
-    CreateFaqDto,
-    UpdateFaqDto,
-    CreateSupportTicketDto,
-    CreateUserManualSectionDto,
-    UpdateUserManualSectionDto,
-    CreateUserManualSubsectionDto,
-    UpdateUserManualSubsectionDto,
-    CreateUserManualContentDto,
-    UpdateUserManualContentDto,
-    CreateAppEvaluationDto,
-} from "@/dto";
-
+import { TablesNames } from "@/enums";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
 import {
     createHandler,
     deleteHandler,
@@ -34,17 +26,18 @@ import {
     getByIdHandler,
     updateHandler,
 } from "src/helpers";
+import { errorRes, newInstanceRes, updatedRes } from "src/responses";
 import {
     CustomResponseType,
     DeleteQueryProps,
     FullTokenPayload,
 } from "src/types";
 import {
-    errorRes,
-    newInstanceRes,
-    updatedRes,
-    deletedRes,
-} from "src/responses";
+    DeleteResult,
+    FindManyOptions,
+    Repository,
+    UpdateResult,
+} from "typeorm";
 
 @Injectable()
 export class SupportService {
@@ -93,7 +86,7 @@ export class SupportService {
             const response = await updateHandler<Faq>({
                 id,
                 dto,
-                table: "Faq",
+                table: TablesNames.FAQ,
                 repository: this.faqRepo,
             });
             return updatedRes<UpdateResult & { newRecord: Faq }>(
@@ -135,7 +128,7 @@ export class SupportService {
         return await getByIdHandler<SupportTicket>({
             id,
             repository: this.ticketRepo,
-            table: "SupportTicket",
+            table: TablesNames.SUPPORT_TICKET,
         });
     }
 
@@ -194,7 +187,7 @@ export class SupportService {
             const response = await updateHandler<UserManualSection>({
                 id,
                 dto,
-                table: "UserManualSection",
+                table: TablesNames.USER_MANUAL_SECTION,
                 repository: this.sectionRepo,
             });
             return updatedRes<UpdateResult & { newRecord: UserManualSection }>(
@@ -275,7 +268,7 @@ export class SupportService {
             const response = await updateHandler<UserManualSubsection>({
                 id,
                 dto: patch,
-                table: "UserManualSubsection",
+                table: TablesNames.USER_MANUAL_SUB_SECTION,
                 repository: this.subsectionRepo,
             });
             return updatedRes<
@@ -356,7 +349,7 @@ export class SupportService {
             const response = await updateHandler<UserManualContent>({
                 id,
                 dto: patch,
-                table: "UserManualContent",
+                table: TablesNames.USER_MANUAL_CONTENT,
                 repository: this.contentRepo,
             });
             return updatedRes<UpdateResult & { newRecord: UserManualContent }>(
@@ -398,7 +391,7 @@ export class SupportService {
         return await getByIdHandler<AppEvaluation>({
             id,
             repository: this.evalRepo,
-            table: "AppEvaluation",
+            table: TablesNames.APP_EVALUATION,
         });
     }
 

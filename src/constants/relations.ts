@@ -14,7 +14,6 @@ type Tables<T> = {
     user: T;
     auditEvent: T;
     file: T;
-    notification: T;
 
     form: T;
     formSection: T;
@@ -81,13 +80,6 @@ const RELATIONS: Tables<RelationsListing> = {
         manyToMany: [],
     },
     file: {
-        oneToOne: [],
-        oneToMany: [],
-        manyToOne: [],
-        manyToMany: [],
-    },
-
-    notification: {
         oneToOne: [],
         oneToMany: [],
         manyToOne: [],
@@ -289,19 +281,6 @@ export const RELATIONS_OBJECT: Tables<{
             ...RELATIONS.user.manyToMany,
         ],
     },
-
-    notification: {
-        descendants: [
-            ...RELATIONS.notification.oneToMany,
-            ...RELATIONS.notification.manyToMany,
-        ],
-        ascendants: [
-            ...RELATIONS.notification.manyToOne,
-            ...RELATIONS.notification.oneToOne,
-            ...RELATIONS.notification.manyToMany,
-        ],
-    },
-
     form: {
         descendants: [
             ...RELATIONS.form.oneToMany,

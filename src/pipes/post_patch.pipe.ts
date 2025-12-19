@@ -25,7 +25,6 @@ const tablesTransformers: { [tableName: string]: NewInstanceTransformer } = {
     role: {},
     permission: {},
     metadata: {},
-    notification: {},
     auditEvent: {},
     logging: {},
     file: {},

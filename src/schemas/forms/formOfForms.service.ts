@@ -1,3 +1,25 @@
+import { CreateFormDto } from "@/dto/forms/create-form.dto";
+import { CreateFormAnswerDto } from "@/dto/forms/formAnswer/create-formAnswer.dto";
+import { UpdateFormAnswerDto } from "@/dto/forms/formAnswer/update-formAnswer.dto";
+import { CreateFormSectionDto } from "@/dto/forms/formSection/create-formSection.dto";
+import { UpdateFormSectionDto } from "@/dto/forms/formSection/update-formSection.dto";
+import { CreateFormSectionInputDto } from "@/dto/forms/formSectionInput/create-formSectionInput.dto";
+import { UpdateFormSectionInputDto } from "@/dto/forms/formSectionInput/update-formSectionInput.dto";
+import { UpdateFormDto } from "@/dto/forms/update-form.dto";
+import { Form, FormAnswer, FormSection, FormSectionInput } from "@/entities";
+import { TablesNames } from "@/enums";
+import {
+    createHandler,
+    deleteHandler,
+    getAllHandler,
+    updateHandler,
+} from "@/helpers";
+import { errorRes, newInstanceRes, updatedRes } from "@/responses";
+import {
+    CustomResponseType,
+    DeleteQueryProps,
+    FullTokenPayload,
+} from "@/types";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
@@ -6,30 +28,6 @@ import {
     Repository,
     UpdateResult,
 } from "typeorm";
-
-import {
-    createHandler,
-    deleteHandler,
-    getAllHandler,
-    updateHandler,
-} from "@/helpers";
-import {
-    CustomResponseType,
-    DeleteQueryProps,
-    FullTokenPayload,
-} from "@/types";
-import { errorRes, newInstanceRes, updatedRes, deletedRes } from "@/responses";
-import { Form, FormAnswer, FormSection, FormSectionInput } from "@/entities";
-import {
-    CreateFormDto,
-    UpdateFormDto,
-    CreateFormSectionDto,
-    UpdateFormSectionDto,
-    CreateFormSectionInputDto,
-    UpdateFormSectionInputDto,
-    CreateFormAnswerDto,
-    UpdateFormAnswerDto,
-} from "@/dto";
 
 @Injectable()
 export class FormOfFormsService {
@@ -76,7 +74,7 @@ export class FormOfFormsService {
             const response = await updateHandler<Form>({
                 id,
                 dto,
-                table: "Form",
+                table: TablesNames.FORM,
                 repository: this.formRepository,
             });
             return updatedRes<UpdateResult & { newRecord: Form }>(
@@ -155,7 +153,7 @@ export class FormOfFormsService {
             const response = await updateHandler<FormSection>({
                 id,
                 dto: patch,
-                table: "FormSection",
+                table: TablesNames.FORM_SECTION,
                 repository: this.sectionRepository,
             });
             return updatedRes<UpdateResult & { newRecord: FormSection }>(
@@ -241,7 +239,7 @@ export class FormOfFormsService {
             const response = await updateHandler<FormSectionInput>({
                 id,
                 dto: patch,
-                table: "FormSectionInput",
+                table: TablesNames.FORM_SECTION_INPUT,
                 repository: this.inputRepository,
             });
             return updatedRes<UpdateResult & { newRecord: FormSectionInput }>(
@@ -316,7 +314,7 @@ export class FormOfFormsService {
             const response = await updateHandler<FormAnswer>({
                 id,
                 dto: patch,
-                table: "FormAnswer",
+                table: TablesNames.FORM_ANSWER,
                 repository: this.answerRepository,
             });
             return updatedRes<UpdateResult & { newRecord: FormAnswer }>(

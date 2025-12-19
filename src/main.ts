@@ -31,8 +31,8 @@ async function bootstrap() {
 
     // configure swagger
     const config = new DocumentBuilder()
-        .setTitle("raven-project DB")
-        .setDescription("The API of the raven-project DB website")
+        .setTitle("initia-backend-template DB")
+        .setDescription("The API of the initia-backend-template DB website")
         .setVersion(APP_VERSION)
         .addBearerAuth()
         .build();

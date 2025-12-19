@@ -1,33 +1,32 @@
+import { ControllerWrapper } from "@/decorators";
+import {
+    CreateDirectUserMessagingDto,
+    CreateUserMessagingDto,
+} from "@/dto/messaging/create-userMessaging.dto";
+import { CreateUserMessagingMessageDto } from "@/dto/messaging/create-userMessagingMessage.dto";
+import { CreateUserMessagingMessageReactionDto } from "@/dto/messaging/create-userMessagingMessageReaction.dto";
+import { DeleteUserMessagingMessageRecipientDto } from "@/dto/messaging/delete-userMessagingMessageRecipient.dto";
+import { UpdateUserMessagingDto } from "@/dto/messaging/update-userMessaging.dto";
+import { UpdateUserMessagingMessageDto } from "@/dto/messaging/update-userMessagingMessage.dto";
+import { UpdateUserMessagingMessageReadStatusDto } from "@/dto/messaging/update-userMessagingMessageReadStatus.dto";
+import { UpdateUserMessagingMessageRecipientDto } from "@/dto/messaging/update-userMessagingMessageRecipient.dto";
 import {
     Body,
     Controller,
     Delete,
     Get,
+    HttpCode,
+    HttpStatus,
     Param,
+    ParseUUIDPipe,
     Patch,
     Post,
     Query,
     Res,
-    UseGuards,
-    ParseUUIDPipe,
-    HttpCode,
-    HttpStatus,
 } from "@nestjs/common";
-import { Response } from "express";
-import { ControllerWrapper } from "@/decorators";
+
+import type { Response } from "express";
 import { UserMessagingService } from "./messaging.service";
-import { FilesService } from "../files/files.service";
-import {
-    CreateUserMessagingDto,
-    CreateDirectUserMessagingDto,
-    CreateUserMessagingMessageDto,
-    CreateUserMessagingMessageReactionDto,
-    UpdateUserMessagingDto,
-    UpdateUserMessagingMessageRecipientDto,
-    DeleteUserMessagingMessageRecipientDto,
-    UpdateUserMessagingMessageDto,
-    UpdateUserMessagingMessageReadStatusDto,
-} from "@/dto";
 
 @ControllerWrapper("userMessaging")
 @Controller("userMessaging")

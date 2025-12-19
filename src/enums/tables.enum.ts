@@ -1,10 +1,3 @@
-export enum NotificationFields {
-    ID = "id",
-
-    CREATED_AT = "createdAt",
-    UPDATED_AT = "updatedAt",
-}
-
 export enum TableOneNameFields {
     ID = "id",
 
@@ -269,8 +262,6 @@ export enum TablesNames {
     FILE = "file",
     AUTH = "auth",
 
-    NOTIFICATION = "notification",
-
     FORM = "form",
     FORM_SECTION = "formSection",
     FORM_SECTION_INPUT = "formSectionInput",
@@ -297,7 +288,6 @@ export enum TablesNames {
 export type AllTablesColumns =
     | NotificationFields
     | TableOneNameFields
-    | NotificationFields
     | FormFields
     | FormSectionFields
     | FormSectionInputFields

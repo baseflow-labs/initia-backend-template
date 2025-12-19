@@ -216,7 +216,7 @@ export class InitialDataSeederService {
     }
 
     private async seedUser({
-        user: { email = "", role = UserRole.ADMIN, password = "" },
+        user: { email = "", role = UserRole.ADMIN, password = "", username },
     }) {
         console.log(`🚀 Seeding User table with INITIAL DATA of ${email}...`);
 
@@ -229,6 +229,7 @@ export class InitialDataSeederService {
                 password,
                 email,
                 role,
+                username,
             });
 
             const user = await userRepo.save(userData);
@@ -251,6 +252,7 @@ export class InitialDataSeederService {
                 user: {
                     password: await hash("s5Rsa2?#sd1154", 12),
                     role: UserRole.ADMIN,
+                    username: "example@example.com",
                     email: "example@example.com",
                 },
             },
